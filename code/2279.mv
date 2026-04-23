@@ -1,0 +1,41 @@
+# 2279 - echo
+# Read and echo all characters until input ends (returns 0)
+
+# Loop: read character into A
+A<I
+
+# Check if A is 0 (end of input)
+# Use lookup table: [0] = 0, [1] = 1
+# If A is 0, halt; otherwise, output and continue
+
+# Actually, we need to check if A == 0
+# Use same trick as 2277
+
+# Use C as base address (128)
+C<128
+
+# Clear [C+A] and [C+0]
+[C+A]<0
+[C+0]<0
+
+# Set [C+A] to 1
+[C+A]<1
+
+# Read from [C+0] into B
+# If A == 0, B will be 1, else 0
+B<[C+0]
+
+# If B == 1, halt
+# Use lookup table: [1] = 1
+[1]<1
+
+# Read from address [B] to get value
+B<[B]
+
+# If B == 1, set Z to halt
+Z<B
+
+# Output A
+O<A
+
+# Loop back to start (implicit)
