@@ -1,0 +1,32 @@
+# 2278 - i++
+# Read '0'-'9', output (value+1) mod 10
+
+# Read character into A
+A<I
+
+# Use lookup table for (value+1) mod 10
+# '0' (48) -> '1' (49)
+# '1' (49) -> '2' (50)
+# ...
+# '9' (57) -> '0' (48)
+
+# Store lookup table at addresses 48-57
+[48]<49
+[49]<50
+[50]<51
+[51]<52
+[52]<53
+[53]<54
+[54]<55
+[55]<56
+[56]<57
+[57]<48
+
+# Read from address [A] to get result
+A<[A]
+
+# Output A
+O<A
+
+# Halt
+Z<1
