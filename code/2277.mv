@@ -1,0 +1,35 @@
+# 2277 - if else
+# Compare two characters, output 1 if same, 0 if different
+
+# Read first character into A
+A<I
+# Read second character into B
+B<I
+
+# Use C as base address (128)
+C<128
+
+# Clear addresses we'll use: [C+A] and [C+B]
+[C+A]<0
+[C+B]<0
+
+# Set [C+A] to 1
+[C+A]<1
+
+# Read from [C+B] into D
+# If A == B, D will be 1, else 0
+D<[C+B]
+
+# Output ASCII '1' (49) if D==1, else '0' (48)
+# Use lookup table: store 48 at address 0, 49 at address 1
+[0]<48
+[1]<49
+
+# Read from address [D] to get ASCII value
+D<[D]
+
+# Output D
+O<D
+
+# Halt
+Z<1
