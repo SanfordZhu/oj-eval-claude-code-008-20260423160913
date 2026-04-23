@@ -59,19 +59,20 @@ void preprocess(const char *mov_code) {
 
         // Parse src
         if (src[0] == '[') {
-            if (sscanf(src, "[%hhu+%hhu]", &buf1, &buf2) == 2) {
+            char buf1_str[2] = "", buf2_str[2] = "";
+            if (sscanf(src, "[%1[A-Z]+%1[A-Z]]", buf1_str, buf2_str) == 2) {
                 code[q].src_mode = 4;
-                code[q].src = buf1 - 'A';
-                code[q].src_offset = buf2 - 'A';
+                code[q].src = buf1_str[0] - 'A';
+                code[q].src_offset = buf2_str[0] - 'A';
                 if (code[q].src_offset == 8 || code[q].src_offset == 14)
                     err("I/O can't be used here");
-            } else if (sscanf(src, "[%hhu+%d]", &buf1, &buf3) == 2) {
+            } else if (sscanf(src, "[%1[A-Z]+%d]", buf1_str, &buf3) == 2) {
                 code[q].src_mode = 3;
-                code[q].src = buf1 - 'A';
+                code[q].src = buf1_str[0] - 'A';
                 code[q].src_offset = (uint16)buf3;
-            } else if (sscanf(src, "[%hhu]", &buf1) == 1) {
+            } else if (sscanf(src, "[%1[A-Z]]", buf1_str) == 1) {
                 code[q].src_mode = 2;
-                code[q].src = buf1 - 'A';
+                code[q].src = buf1_str[0] - 'A';
                 code[q].src_offset = 0;
             } else if (sscanf(src, "[%d]", &buf3) == 1) {
                 code[q].src_mode = 5;
@@ -98,19 +99,20 @@ void preprocess(const char *mov_code) {
 
         // Parse dest
         if (dest[0] == '[') {
-            if (sscanf(dest, "[%hhu+%hhu]", &buf1, &buf2) == 2) {
+            char buf1_str[2] = "", buf2_str[2] = "";
+            if (sscanf(dest, "[%1[A-Z]+%1[A-Z]]", buf1_str, buf2_str) == 2) {
                 code[q].dest_mode = 4;
-                code[q].dest = buf1 - 'A';
-                code[q].dest_offset = buf2 - 'A';
+                code[q].dest = buf1_str[0] - 'A';
+                code[q].dest_offset = buf2_str[0] - 'A';
                 if (code[q].dest_offset == 8 || code[q].dest_offset == 14)
                     err("I/O can't be used here");
-            } else if (sscanf(dest, "[%hhu+%d]", &buf1, &buf3) == 2) {
+            } else if (sscanf(dest, "[%1[A-Z]+%d]", buf1_str, &buf3) == 2) {
                 code[q].dest_mode = 3;
-                code[q].dest = buf1 - 'A';
+                code[q].dest = buf1_str[0] - 'A';
                 code[q].dest_offset = (uint16)buf3;
-            } else if (sscanf(dest, "[%hhu]", &buf1) == 1) {
+            } else if (sscanf(dest, "[%1[A-Z]]", buf1_str) == 1) {
                 code[q].dest_mode = 2;
-                code[q].dest = buf1 - 'A';
+                code[q].dest = buf1_str[0] - 'A';
                 code[q].dest_offset = 0;
             } else if (sscanf(dest, "[%d]", &buf3) == 1) {
                 code[q].dest_mode = 5;
